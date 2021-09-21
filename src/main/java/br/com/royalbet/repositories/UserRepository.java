@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.royalbet.models.User;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-}
+public interface UserRepository extends JpaRepository<User, Long> {}
