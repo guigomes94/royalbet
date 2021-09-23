@@ -64,35 +64,7 @@ public class BetController {
 
 
 
-    public List<String> sorteador(){
-        List<String> numbers = null;
-        Integer numberSort;
 
-        for(int x = 1; x<=6;x++){
-           // Adiciono o primeiro número devido o list está vazio
-            if(numbers.isEmpty()){
-                numbers.add(generateNumber().toString());
-            }else{
-                numberSort = generateNumber();
-                // validação para não inserir o mesmo número mais vezes
-                if(numberSort == 0 || numbers.contains(numberSort.toString())){
-                    numberSort = generateNumber();
-                    numbers.add(numberSort.toString());
-                }
-            }
-
-        }
-
-        return numbers;
-    }
-
-
-    public Integer generateNumber(){
-        Random random = new Random();
-        int number = random.nextInt(61);
-
-        return number;
-    }
 
 }
 
