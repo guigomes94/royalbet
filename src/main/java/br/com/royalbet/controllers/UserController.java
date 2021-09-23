@@ -21,7 +21,7 @@ public class UserController {
     @RequestMapping("/form")
     public String getUserForm(User usuario, Model model){
         model.addAttribute("usuario", usuario);
-        return "usuario/form";
+        return "user/form";
 
     }
 
