@@ -2,8 +2,10 @@ package br.com.royalbet.controllers;
 
 
 import br.com.royalbet.models.User;
+import br.com.royalbet.models.UserForm;
 import br.com.royalbet.repositories.UserRepository;
 import br.com.royalbet.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +21,10 @@ public class UserController {
     UserService service;
 
     @RequestMapping("/form")
-    public String getUserForm(User usuario, Model model){
-        model.addAttribute("usuario", usuario);
-        return "usuario/form";
+    public ModelAndView getUserForm(ModelAndView modelAndView){
+        modelAndView.setViewName("user/form");
+        modelAndView.addObject("userForm", new UserForm());
+        return modelAndView;
 
     }
 
@@ -46,7 +49,7 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/create/users")
+    @PostMapping(value = "/create")
     public String createUser(User usuario, Model model){
         if(usuario.getCpf() == null || usuario.getName() == null || usuario.getName() == null){
             model.addAttribute("mensagem", "Prencha os campos obrigatórios");

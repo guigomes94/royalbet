@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pt_BR">
+    <meta http-equiv="Content-Type"content="text/html"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<title>a</title>
+<body>
+<div class="container">
+    <div th:fragment="menu">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand"href="#">Royal Bet</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbars ExampleDefault" aria-controls="navbars ExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+
+    </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbars ExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown "
+                    th:if="${session.user != null and session.user}"><a
+                            class="nav-link dropdown-toggle" href="#" id="dropdown00"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
+                    <li class="nav-item dropdown "
+                        th:if="${session.user != null and session.user}"><a
+                            class="nav-link dropdown-toggle" href="#" id="dropdown01"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apostas</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">Conta </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"th:href="@{/bet}" id="dropdown03"data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Apostas</a>
+                        </li></ul>
+                <form th:action="@{/login/out}"class="form-inline my-2 my-lg-0"><span style="margin-right:15px; color: lightgray;">+++</span>
+                    <span th:if="${session.usuario != null}">
+                        <span th:text="${session.usuario.name}"
+                              style="margin-right: 20px; color:lightgray;"></span>
+                    <button class="btn btn-secondary my-2 my-sm-0"type="submit">Sair</button>
+                    </span>
+                </form>
+            </div>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

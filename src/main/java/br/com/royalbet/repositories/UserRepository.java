@@ -9,4 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public interface UserRepository extends JpaRepository<User, Long> {}
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByCpf(String cpf);
+}

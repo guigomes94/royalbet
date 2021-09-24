@@ -11,6 +11,6 @@ public class MainController {
     // método para retornar a homepage
     @GetMapping ("/")
     public String homePage(){
-        return "homePage";
+        return "login/login";
     }
 }
