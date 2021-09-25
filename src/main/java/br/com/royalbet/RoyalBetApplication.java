@@ -16,6 +16,7 @@ public class RoyalBetApplication {
 		registrationBean.setFilter(customURLFilter);
 		registrationBean.addUrlPatterns("/bet/*");
 		registrationBean.addUrlPatterns("/home/*");
+		registrationBean.addUrlPatterns("/sorteio/*");
 		registrationBean.setOrder(1);
 		return registrationBean;
 	}

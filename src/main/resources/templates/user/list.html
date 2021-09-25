@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Usuários cadastrados</title>
+</head>
+<body>
+	<div th:insert="fragments/navigation :: menu"></div>
+	<br />
+	<br />
+	<br />
+	<h1>Usuários cadastrados</h1>
+	<table>
+		<tr>
+			<th>NOME</th>
+			<th>CPF</th>
+			<th>DATA DE NASCIMENTO</th>
+			<th>OPERADOR</th>
+		</tr>
+		<tr th:each="user : ${users}">
+			<td><span th:text="${user.name}"></span></td>
+			<td><span th:text="${user.cpf}"></span></td>
+			<td><span th:text="${user.birthDate}"></span></td>
+			<td><span th:text="${user.isOperator}"></span></td>
+		</tr>
+	</table>
+</body>
+</html>

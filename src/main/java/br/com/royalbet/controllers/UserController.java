@@ -1,5 +1,7 @@
 package br.com.royalbet.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +32,26 @@ public class UserController {
 		return modelAndView;
 	}
 
-	@GetMapping(value = "/form/{id}")
-	public String editUsuario(@PathVariable(value = "id") Long id, Model model) {
+	@GetMapping("/form/{id}")
+	public String findById(@PathVariable(value = "id") Long id, Model model) {
 		User usuario = service.findById(id);
 		if (usuario == null) {
 			model.addAttribute("mensagem", "Usuario não encontrado");
 			model.addAttribute("user", new User());
 		} else {
-			model.addAttribute("usuario", usuario);
+			model.addAttribute("user", usuario);
 		}
 		return "user/form";
 	}
+	
+	@GetMapping("/admin")
+	public String listUsuarios(Model model) {
+		List<User> users = service.findAll();
+		model.addAttribute("users", users);
+		return "user/list";
+	}
 
-	@PostMapping(value = "/create")
+	@PostMapping("/create")
 	public ModelAndView createUser(@Valid User usuario, BindingResult result, RedirectAttributes redirectAttributes,
 			ModelAndView model) {
 		if (result.hasErrors()) {
@@ -51,11 +60,18 @@ public class UserController {
 			return model;
 
 		} else {
-			service.insert(usuario);
-			redirectAttributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso");
+			User u = service.findByCpf(usuario.getCpf());
+			if (u != null) {
+				service.update(u.getId(), usuario);
+				redirectAttributes.addFlashAttribute("mensagem", "Usuário atualizado com sucesso");
+			} else {
+				service.insert(usuario);
+				redirectAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso");
+			}
 			model.setViewName("redirect:/login");
 			return model;
 		}
 	}
+	
 
 }

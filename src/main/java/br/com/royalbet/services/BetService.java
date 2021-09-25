@@ -83,4 +83,9 @@ public class BetService {
 
         return number;
     }
+
+	public List<Bet> findByIdUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

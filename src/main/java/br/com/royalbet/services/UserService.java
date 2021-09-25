@@ -30,6 +30,14 @@ public class UserService {
 				.orElseThrow(() -> new ResourceNotFoundException(id));
 	}	 
 	
+	public User findByCpf(String cpf) {
+		User user = repository.findByCpf(cpf);
+		if (user != null) {
+			return user;
+		}
+		return null;
+	}
+	
 	public User insert(User obj) {
 		obj.setPassword(PasswordUtil.hashPassword(obj.getPassword()));
 		return repository.save(obj);
@@ -47,7 +55,7 @@ public class UserService {
 	
 	private void updateData(User entity, User obj) {
 		entity.setName(obj.getName());
-		entity.setPassword(obj.getPassword());
+		entity.setPassword(PasswordUtil.hashPassword(obj.getPassword()));
 		entity.setBirthDate(obj.getBirthDate());
 		entity.setCpf(obj.getCpf());
 	}
