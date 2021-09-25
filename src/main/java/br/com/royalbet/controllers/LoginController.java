@@ -17,48 +17,45 @@ import br.com.royalbet.util.PasswordUtil;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
+	@Autowired
 	private UserRepository userRepository;
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getForm(ModelAndView modelAndView){
-        modelAndView.setViewName("login/login");
-        modelAndView.addObject("user", new User());
-        return modelAndView;
-    }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView valide(User user,
-                               HttpSession session,
-                               ModelAndView modelAndView,
-                               RedirectAttributes redirectAttributes
-                                ){
-        if((user = this.isValido(user))!= null){
-            session.setAttribute("usuario", user);
-            modelAndView.setViewName("redirect:/home");
-        } else {
-            redirectAttributes.addFlashAttribute("mensagem", "Login e/ou inválidos!");
-            modelAndView.setViewName("redirect:/login");
-        }
-        return modelAndView;
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView getForm(ModelAndView modelAndView) {
+		modelAndView.setViewName("login/login");
+		modelAndView.addObject("user", new User());
+		return modelAndView;
+	}
 
-    @RequestMapping("/out")
-    public ModelAndView logout(ModelAndView mav, HttpSession session){
-        session.invalidate();
-        mav.setViewName("redirect:/login");
-        return mav;
-    }
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView valide(User user, HttpSession session, ModelAndView modelAndView,
+			RedirectAttributes redirectAttributes) {
+		if ((user = this.isValido(user)) != null) {
+			session.setAttribute("usuario", user);
+			modelAndView.setViewName("redirect:/home");
+		} else {
+			redirectAttributes.addFlashAttribute("mensagem", "Login e/ou inválidos!");
+			modelAndView.setViewName("redirect:/login");
+		}
+		return modelAndView;
+	}
 
-    public User isValido(User user){
+	@RequestMapping("/out")
+	public ModelAndView logout(ModelAndView mav, HttpSession session) {
+		session.invalidate();
+		mav.setViewName("redirect:/login");
+		return mav;
+	}
 
-        User userBanco = userRepository.findByCpf(user.getCpf());
-        boolean valido = false;
-        if(userBanco != null){
-            if(PasswordUtil.checkPass(user.getPassword(), userBanco.getPassword())) {
-                valido = true;
-            }
-        }
-        return valido ? userBanco : null;
-    }
+	public User isValido(User user) {
+
+		User userBanco = userRepository.findByCpf(user.getCpf());
+		boolean valido = false;
+		if (userBanco != null) {
+			if (PasswordUtil.checkPass(user.getPassword(), userBanco.getPassword())) {
+				valido = true;
+			}
+		}
+		return valido ? userBanco : null;
+	}
 }

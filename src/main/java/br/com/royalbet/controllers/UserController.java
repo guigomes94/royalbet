@@ -53,7 +53,7 @@ public class UserController {
 			service.insert(usuario);
 			redirectAttributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso");
 			return "redirect:login/login";
-		}	
+		}
 	}
 
 }

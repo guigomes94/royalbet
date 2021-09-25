@@ -1,6 +1,5 @@
 package br.com.royalbet.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,55 +15,50 @@ import br.com.royalbet.services.BetService;
 @RequestMapping("/bet")
 public class BetController {
 
-    @Autowired
+	@Autowired
 	private BetService service;
 
-    @RequestMapping("/form")
-    public String getBetForm(Bet sorteio, Model model) {
-        model.addAttribute("sorteio", sorteio);
-        return "bet/form";
-    }
+	@RequestMapping("/form")
+	public String getBetForm(Bet sorteio, Model model) {
+		model.addAttribute("sorteio", sorteio);
+		return "bet/form";
+	}
 
-    @GetMapping(value = "bets")
-    public String listAllBets(Model model) {
-        model.addAttribute("bets", service.findAll());
-        return "bet/bets";
-    }
+	@GetMapping(value = "bets")
+	public String listAllBets(Model model) {
+		model.addAttribute("bets", service.findAll());
+		return "bet/bets";
+	}
 
-    @GetMapping(value = "/bets{id}")
-    public String listBetId(@PathVariable(value = "id") Long id, Model model) {
-        Bet bet = service.findById(id);
-        if (bet == null) {
-            model.addAttribute("mensagem", "Sorteio não encontrado");
-            model.addAttribute("bet", new Bet());
-        } else {
-            model.addAttribute("bet", bet);
-        }
-        return "bet/form";
-    }
+	@GetMapping(value = "/bets{id}")
+	public String listBetId(@PathVariable(value = "id") Long id, Model model) {
+		Bet bet = service.findById(id);
+		if (bet == null) {
+			model.addAttribute("mensagem", "Sorteio não encontrado");
+			model.addAttribute("bet", new Bet());
+		} else {
+			model.addAttribute("bet", bet);
+		}
+		return "bet/form";
+	}
 
-    @PostMapping(value = "/create/bet")
-    public String createBet(Bet bet, Model model) {
-        if (bet.getDataBet() == null) {
-            model.addAttribute("mensagem", "Prencha os campos obrigatórios");
-            return "bet/form";
-        } else {
-            service.insert(bet);
-            model.addAttribute("mensagem", "Sorteio cadastrado com sucesso");
-            return "bet/bets";
-        }
-    }
+	@PostMapping(value = "/create/bet")
+	public String createBet(Bet bet, Model model) {
+		if (bet.getDataBet() == null) {
+			model.addAttribute("mensagem", "Prencha os campos obrigatórios");
+			return "bet/form";
+		} else {
+			service.insert(bet);
+			model.addAttribute("mensagem", "Sorteio cadastrado com sucesso");
+			return "bet/bets";
+		}
+	}
 
-    /*@GetMapping("/bet/sorteia")
-    public List generateSorteio(Model model){
-
-    }
-
-     */
-
-
-
-
+	/*
+	 * @GetMapping("/bet/sorteia") public List generateSorteio(Model model){
+	 * 
+	 * }
+	 * 
+	 */
 
 }
-

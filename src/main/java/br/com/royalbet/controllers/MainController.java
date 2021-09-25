@@ -1,16 +1,17 @@
 package br.com.royalbet.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.royalbet.models.User;
+
 @Controller
-@RequestMapping("/")
 public class MainController {
 
-    // método para retornar a homepage
-    @GetMapping ("/")
-    public String homePage(){
-        return "login/login";
+	@RequestMapping(value="/")
+    public String homePage(Model model){
+		model.addAttribute("user", new User());
+        return "login/login";	
     }
 }
