@@ -16,6 +16,7 @@ public class RoyalBetApplication {
 		LoginFilter customURLFilter = new LoginFilter();
 		registrationBean.setFilter(customURLFilter);
 		registrationBean.addUrlPatterns("/bet/*");
+		registrationBean.addUrlPatterns("/home/*");
 		registrationBean.setOrder(1);
 		return registrationBean;
 	}
