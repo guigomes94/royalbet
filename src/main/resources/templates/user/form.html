@@ -18,19 +18,24 @@
                         <input class="col-md-6 mb-3 form-control input-group" type="text" placeholder="CPF"  th:field="*{cpf}"/>
                         <p th:if="${#fields.hasErrors('cpf')}" th:errorclass="error" th:errors="*{cpf}" style="color: red"/>
                     </div>
-
+                    <p th:if="${#fields.hasErrors('user.cpf')}"
+                       th:errorclass="error" th:errors="*{user.cpf}"/>
                 </div>
                 <div class="flex-column">
                     <div class="col-md-10 mb-3">
                         <input class="col-md-6 mb-3 form-control input-group" type="text" placeholder="Nome" th:field="*{name}">
                         <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}" style="color: red"/>
                     </div>
+                    <p th:if="${#fields.hasErrors('user.name')}"
+                       th:errorclass="error" th:errors="*{user.name}"/>
                 </div>
                 <div class="flex-column">
                     <div class="col-md-10 mb-3">
                         <input class="col-md-6 mb-3 form-control input-group" type="date" placeholder="Data de nascimento" th:field="*{birthDate}"/>
                         <p th:if="${#fields.hasErrors('birthDate')}" th:errorclass="error" th:errors="*{birthDate}" style="color: red"/>
                     </div>
+                    <p th:if="${#fields.hasErrors('user.birthDate')}"
+                       th:errorclass="error" th:errors="*{user.birthDate}"/>
                 </div>
                 <div class="flex-column">
                     <div class="col-md-10 mb-3">
