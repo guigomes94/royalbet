@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
     UserRepository userRepository;
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getForm(ModelAndView modelAndView){
