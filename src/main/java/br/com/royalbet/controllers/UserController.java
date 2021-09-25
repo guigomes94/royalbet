@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.royalbet.models.User;
-import br.com.royalbet.models.UserForm;
 import br.com.royalbet.services.UserService;
 
 @Controller
