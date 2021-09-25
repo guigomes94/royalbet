@@ -6,9 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import java.util.Date;
 
 @Entity
+@Table(name ="tb_bet")
 public class Bet {
 	
 	@Id
@@ -27,7 +30,9 @@ public class Bet {
 	
 	private boolean isFavorite;
 
-	private Date dataBet;
+	private Date betDate;
+	
+	private Double price;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -58,11 +63,19 @@ public class Bet {
 	}
 
 	public Date getDataBet() {
-		return dataBet;
+		return betDate;
 	}
 
 	public void setDataBet(Date dataBet) {
-		this.dataBet = dataBet;
+		this.betDate = dataBet;
+	}
+	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	@Override

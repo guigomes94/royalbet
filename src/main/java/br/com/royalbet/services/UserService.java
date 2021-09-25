@@ -44,8 +44,10 @@ public class UserService {
 	}
 	
 	private void updateData(User entity, User obj) {
-		// implementar
-		
+		entity.setName(obj.getName());
+		entity.setPassword(obj.getPassword());
+		entity.setBirthDate(obj.getBirthDate());
+		entity.setCpf(obj.getCpf());
 	}
 
 	public void delete(Long id) {

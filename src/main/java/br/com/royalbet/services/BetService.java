@@ -1,18 +1,18 @@
 package br.com.royalbet.services;
 
-import br.com.royalbet.models.Bet;
-import br.com.royalbet.models.User;
-import br.com.royalbet.repositories.BetRepository;
-import br.com.royalbet.repositories.UserRepository;
-import br.com.royalbet.services.exceptions.DatabaseException;
-import br.com.royalbet.services.exceptions.ResourceNotFoundException;
+import java.util.List;
+import java.util.Random;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Random;
+import br.com.royalbet.models.Bet;
+import br.com.royalbet.repositories.BetRepository;
+import br.com.royalbet.services.exceptions.DatabaseException;
+import br.com.royalbet.services.exceptions.ResourceNotFoundException;
 
 public class BetService {
 
@@ -29,22 +29,19 @@ public class BetService {
     }
 
     public Bet insert(Bet obj) {
+    	Integer qtdDezenas = obj.getNumbers().split(",").length;
+    	obj.setPrice(calcPrice(qtdDezenas));
         return repository.save(obj);
     }
-
-    public Bet update(Long id, Bet obj) {
-        try {
-            Bet entity = repository.getById(id);
-            updateData(entity, obj);
-            return repository.save(entity);
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
-        }
-    }
-
-    private void updateData(Bet entity, Bet obj) {
-        // implementar
-
+    
+    public Bet setFavorite(Long id, Bet obj) {
+    	 try {
+             Bet entity = repository.getById(id);
+             entity.setFavorite(obj.isFavorite());
+             return repository.save(entity);
+         } catch (EntityNotFoundException e) {
+             throw new ResourceNotFoundException(id);
+         }
     }
 
     public void delete(Long id) {
@@ -56,6 +53,22 @@ public class BetService {
             throw new DatabaseException(e.getMessage());
         }
 
+    }
+    
+    private Double calcPrice(int qtdDezenas) {
+    	switch(qtdDezenas) {
+    	case 7:
+    		return 15.0;
+    	case 8:
+    		return 90.0;
+    	case 9:
+    		return 300.0;
+    	case 10:
+    		return 1_200.0;
+    	default:
+    		return 3.0;
+    	}
+    	
     }
 
     public List<String> sorteador(){

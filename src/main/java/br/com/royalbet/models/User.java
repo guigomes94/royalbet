@@ -1,23 +1,16 @@
 package br.com.royalbet.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", length = 1, discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("USER")
 @Table(name ="tb_user")
 public class User {
 	
@@ -28,11 +21,14 @@ public class User {
 	private String name;
 	
 	private String password;
+	
 	private Date birthDate;
 	
 	private String cpf;
-	@Column(insertable=false, updatable=false)
-	private String type;
+	
+	private boolean isOperator;
+	
+	private List<Bet> favoriteBets = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -70,12 +66,20 @@ public class User {
 		this.cpf = cpf;
 	}
 	
-	public String getType() {
-		return type;
+	public boolean isOperator() {
+		return isOperator;
+	}
+
+	public void setOperator(boolean isOperator) {
+		this.isOperator = isOperator;
 	}
 	
-	public void setType(String type) {
-		this.type = type;
+	public List<Bet> getFavoriteBets() {
+		return favoriteBets;
+	}
+	
+	public void addFavoriteBet(Bet aposta) {
+		favoriteBets.add(aposta);
 	}
 	
 	@Override
