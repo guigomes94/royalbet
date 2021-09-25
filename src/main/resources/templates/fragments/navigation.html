@@ -20,22 +20,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbars ExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"
-                        th:if="${session.usuario != null}"><a
-                            class="nav-link " href="#" id="link01"
-                            aria-haspopup="true" aria-expanded="false">Usuário</a></li>
-                    <li class="nav-item"
-                        th:if="${session.usuario != null}"><a
-                            class="nav-link " href="#" id="link02"
-                            aria-haspopup="true" aria-expanded="false">Apostas</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="link03"
-                           aria-haspopup="true" aria-expanded="false">Sorteio</a></li>
-                </ul>
-                <form th:action="@{/login/out}" class="form-inline my-2 my-lg-0"><span
-                        style="margin-right:15px; color: lightgray;">+++</span>
-                    <span th:if="${session.usuario != null}">
-                        <span th:text="${session.usuario.name}"
+                    <li class="nav-item dropdown "
+                    th:if="${session.user != null}"><a
+                            class="nav-link dropdown-toggle" href="#" id="dropdown00"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuario</a>
+                    <li class="nav-item dropdown "
+                        th:if="${session.user != null}"><a
+                            class="nav-link dropdown-toggle" href="#" id="dropdown01"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apostas</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">Conta </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"th:href="@{/bet}" id="dropdown03"data-toggle="dropdown"aria-haspopup="true"aria-expanded="false">Apostas</a>
+                        </li></ul>
+                <form th:action="@{/login/out}"class="form-inline my-2 my-lg-0"><span style="margin-right:15px; color: lightgray;">+++</span>
+                    <span th:if="${session.user != null}">
+                        <span th:text="${session.user.name}"
                               style="margin-right: 20px; color:lightgray;"></span>
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Sair</button>
                     </span>
