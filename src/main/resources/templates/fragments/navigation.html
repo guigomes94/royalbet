@@ -7,13 +7,14 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 </head>
 <title>a</title>
 <body>
 	<div class="container">
 		<div th:fragment="menu">
 			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-				<a class="navbar-brand" href="#">Royal Bet</a>
+				<a class="navbar-brand" th:href="@{/home}">Royal Bet</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbars ExampleDefault"
 					aria-controls="navbars ExampleDefault" aria-expanded="false"
@@ -23,27 +24,28 @@
 				<div class="collapse navbar-collapse" id="navbars ExampleDefault">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item dropdown " th:if="${session.user != null}"><a
-							class="nav-link " th:href="@{/user/form/{id}(id=${session.user.id})}" aria-haspopup="true"
-							aria-expanded="false">Usuário</a></li>
+							class="nav-link "
+							th:href="@{/home/user/{id}(id=${session.user.id})}"
+							aria-haspopup="true" aria-expanded="false">Usuário</a></li>
 
 						<li class="nav-item dropdown " th:if="${session.user != null}"><a
 							class="nav-link " th:href="@{/bet/myBets}" aria-haspopup="true"
 							aria-expanded="false">Apostas</a></li>
-							
+
 						<li class="nav-item dropdown" th:if="${session.user != null}">
-						<a class="nav-link" th:if="${session.user.isOperator}"
+							<a class="nav-link" th:if="${session.user.isOperator}"
 							th:href="@{/sorteio/sorteioOperador}" aria-haspopup="true"
-							aria-expanded="false">Sorteios</a>
-						<a class="nav-link" th:unless="${session.user.isOperator}"
+							aria-expanded="false">Sorteios</a> <a class="nav-link"
+							th:unless="${session.user.isOperator}"
 							th:href="@{/sorteio/sorteioCliente}" aria-haspopup="true"
 							aria-expanded="false">Sorteios</a>
 						</li>
 						<li class="nav-item dropdown" th:if="${session.user != null}">
-						<a class="nav-link" th:if="${session.user.isOperator}"
+							<a class="nav-link" th:if="${session.user.isOperator}"
 							th:href="@{/user/admin}" aria-haspopup="true"
 							aria-expanded="false">Admin de Usuários</a>
 						</li>
-						
+
 					</ul>
 					<form th:action="@{/login/out}" class="form-inline my-2 my-lg-0">
 						<span style="margin-right: 15px; color: lightgray;"></span> <span

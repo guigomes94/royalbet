@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<meta charset="UTF-8">
+<title>Editar usuário</title>
+</head>
+<body>
+	<div th:insert="fragments/navigation :: menu"></div>
+	<br />
+	<br />
+	<br />
+	<main role="main" class="container">
+		<div class="starter-template">
+			<div class="col-md-8 order-md-1">
+				<h1 class="mb-3">Editar usuário</h1>
+				<form th:action="@{/user/create}" method="POST" th:object="${user}">
+
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group" type="text"
+								placeholder="CPF" th:field="*{cpf}" />
+							<p th:if="${#fields.hasErrors('cpf')}" th:errorclass="error"
+								th:errors="*{cpf}" style="color: red" />
+						</div>
+
+					</div>
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group" type="text"
+								placeholder="Nome" th:field="*{name}">
+							<p th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+								th:errors="*{name}" style="color: red" />
+						</div>
+
+					</div>
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group" type="date"
+								placeholder="Data de nascimento" th:field="*{birthDate}" />
+							<p th:if="${#fields.hasErrors('birthDate')}"
+								th:errorclass="error" th:errors="*{birthDate}"
+								style="color: red" />
+						</div>
+
+					</div>
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group"
+								type="password" placeholder="Digite sua senha"
+								th:field="*{password}" />
+							<p th:if="${#fields.hasErrors('password')}" th:errorclass="error"
+								th:errors="*{password}" style="color: red" />
+						</div>
+					</div>
+					<hr class="mb-4">
+					<div class="flex-column">
+						<button class="col-md-3 mb-3 btn btn-success btn-lg btn-block"
+							type="submit">Salvar</button>
+						<a class="col-md-3 mb-3" th:href="@{/login}">Cancelar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
