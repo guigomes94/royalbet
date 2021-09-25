@@ -27,7 +27,7 @@ public class UserController {
 	@RequestMapping("/form")
 	public ModelAndView getUserForm(ModelAndView modelAndView) {
 		modelAndView.setViewName("user/form");
-		modelAndView.addObject("userForm", new UserForm());
+		modelAndView.addObject("user", new User());
 		return modelAndView;
 	}
 
@@ -44,16 +44,18 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/create")
-	public String createUser(@Valid UserForm form, BindingResult result, RedirectAttributes redirectAttributes) {
-		User usuario = form.getUser();
+	public ModelAndView createUser(@Valid User usuario, BindingResult result, RedirectAttributes redirectAttributes, ModelAndView model) {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("mensagem", "Prencha os campos obrigatórios");
-			return "user/form";
+			model.setViewName("user/form");
+			return model;
+
 		} else {
 			service.insert(usuario);
 			redirectAttributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso");
-			return "redirect:login/login";
-		}
+			model.setViewName("redirect:/login");
+			return model;
+		}	
 	}
 
 }

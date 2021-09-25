@@ -21,14 +21,12 @@ public class User {
 	private String name;
 
 	@NotBlank(message = "Campo obrigatorio")
-	@Size(min = 5, max = 15, message = "A senha deve ter entre 5 a 15 caracteres")
 	private String password;
 
 	@NotBlank(message = "Campo obrigatorio")
 	private String birthDate;
 
 	@NotBlank(message = "Campo obrigatorio")
-	@Size(min = 11,max = 11, message = "A senha deve ter entre 5 a 15 caracteres")
 	private String cpf;
 	
 	private boolean isOperator;

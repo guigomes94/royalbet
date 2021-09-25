@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.royalbet.models.Bet;
 import br.com.royalbet.services.BetService;
@@ -24,10 +25,10 @@ public class BetController {
 		return "bet/form";
 	}
 
-	@GetMapping(value = "bets")
-	public String listAllBets(Model model) {
-		model.addAttribute("bets", service.findAll());
-		return "bet/bets";
+	@GetMapping(value = "/bets")
+	public ModelAndView listAllBets(ModelAndView model) {
+		model.setViewName("redirect:/home");
+		return model;
 	}
 
 	@GetMapping(value = "/bets{id}")
@@ -53,12 +54,5 @@ public class BetController {
 			return "bet/bets";
 		}
 	}
-
-	/*
-	 * @GetMapping("/bet/sorteia") public List generateSorteio(Model model){
-	 * 
-	 * }
-	 * 
-	 */
 
 }

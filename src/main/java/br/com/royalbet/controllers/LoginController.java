@@ -31,7 +31,7 @@ public class LoginController {
 	public ModelAndView valide(User user, HttpSession session, ModelAndView modelAndView,
 			RedirectAttributes redirectAttributes) {
 		if ((user = this.isValido(user)) != null) {
-			session.setAttribute("usuario", user);
+			session.setAttribute("user", user);
 			modelAndView.setViewName("redirect:/home");
 		} else {
 			redirectAttributes.addFlashAttribute("mensagem", "Login e/ou inválidos!");
