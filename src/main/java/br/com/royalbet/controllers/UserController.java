@@ -27,7 +27,7 @@ public class UserController {
 	@RequestMapping("/form")
 	public ModelAndView getUserForm(ModelAndView modelAndView) {
 		modelAndView.setViewName("user/form");
-		modelAndView.addObject("userForm", new UserForm());
+		modelAndView.addObject("user", new User());
 		return modelAndView;
 	}
 
@@ -44,8 +44,7 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/create")
-	public String createUser(@Valid UserForm form, BindingResult result, RedirectAttributes redirectAttributes) {
-		User usuario = form.getUser();
+	public String createUser(@Valid User usuario, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("mensagem", "Prencha os campos obrigatórios");
 			return "user/form";
