@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name ="tb_user")
@@ -13,13 +16,19 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@NotBlank(message = "Campo obrigatorio")
 	private String name;
-	
+
+	@NotBlank(message = "Campo obrigatorio")
+	@Size(min = 5, max = 15, message = "A senha deve ter entre 5 a 15 caracteres")
 	private String password;
-	
+
+	@NotBlank(message = "Campo obrigatorio")
 	private String birthDate;
-	
+
+	@NotBlank(message = "Campo obrigatorio")
+	@Size(min = 11,max = 11, message = "A senha deve ter entre 5 a 15 caracteres")
 	private String cpf;
 	
 	private boolean isOperator;
