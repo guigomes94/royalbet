@@ -43,7 +43,8 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/create")
-	public ModelAndView createUser(@Valid User usuario, BindingResult result, RedirectAttributes redirectAttributes, ModelAndView model) {
+	public ModelAndView createUser(@Valid User usuario, BindingResult result, RedirectAttributes redirectAttributes,
+			ModelAndView model) {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("mensagem", "Prencha os campos obrigatórios");
 			model.setViewName("user/form");
@@ -54,7 +55,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso");
 			model.setViewName("redirect:/login");
 			return model;
-		}	
+		}
 	}
 
 }

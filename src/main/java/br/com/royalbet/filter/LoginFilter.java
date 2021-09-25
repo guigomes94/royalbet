@@ -14,38 +14,41 @@ import javax.servlet.http.HttpSession;
 
 import br.com.royalbet.models.User;
 
-public class LoginFilter implements Filter{
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-        throws IOException, ServletException{
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        HttpSession httpSession = httpRequest.getSession(false);
+public class LoginFilter implements Filter {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		HttpSession httpSession = httpRequest.getSession(false);
 
-        String uri = httpRequest.getRequestURI();
-        if(httpSession != null){
-            User loginUser = (User) httpSession.getAttribute("user");
-            if(loginUser == null){
-                redirectLogin(httpRequest, httpResponse, uri);
-                return;
-            } else{
-                chain.doFilter(request, response);
-            }
-        } else {
-            redirectLogin(httpRequest, httpResponse, uri);
-        }
-    }
+		String uri = httpRequest.getRequestURI();
+		if (httpSession != null) {
+			User loginUser = (User) httpSession.getAttribute("user");
+			if (loginUser == null) {
+				redirectLogin(httpRequest, httpResponse, uri);
+				return;
+			} else {
+				chain.doFilter(request, response);
+			}
+		} else {
+			redirectLogin(httpRequest, httpResponse, uri);
+		}
+	}
 
-    private void redirectLogin(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String uri) throws IOException {
-        String baseUrl = httpRequest.getContextPath();
-        String paginaLogin = baseUrl + "/login";
-        httpResponse.sendRedirect(httpResponse.encodeRedirectURL(paginaLogin));
+	private void redirectLogin(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String uri)
+			throws IOException {
+		String baseUrl = httpRequest.getContextPath();
+		String paginaLogin = baseUrl + "/login";
+		httpResponse.sendRedirect(httpResponse.encodeRedirectURL(paginaLogin));
 
-    }
-    @Override
-    public void init(FilterConfig arg0) throws ServletException{
-    }
-    @Override
-    public void destroy(){
+	}
 
-    }
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+	}
+
+	@Override
+	public void destroy() {
+
+	}
 }

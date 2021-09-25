@@ -10,9 +10,8 @@ import br.com.royalbet.filter.LoginFilter;
 @SpringBootApplication
 public class RoyalBetApplication {
 	@Bean
-	public FilterRegistrationBean<LoginFilter> filterRegistrationBean(){
-		FilterRegistrationBean<LoginFilter> registrationBean
-				= new FilterRegistrationBean<LoginFilter>();
+	public FilterRegistrationBean<LoginFilter> filterRegistrationBean() {
+		FilterRegistrationBean<LoginFilter> registrationBean = new FilterRegistrationBean<LoginFilter>();
 		LoginFilter customURLFilter = new LoginFilter();
 		registrationBean.setFilter(customURLFilter);
 		registrationBean.addUrlPatterns("/bet/*");
@@ -21,12 +20,8 @@ public class RoyalBetApplication {
 		return registrationBean;
 	}
 
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(RoyalBetApplication.class, args);
 	}
-
-
 
 }
