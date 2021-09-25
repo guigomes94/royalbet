@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("USER")
 @Table(name ="tb_user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -33,7 +33,7 @@ public class User {
 	private String cpf;
 	@Column(insertable=false, updatable=false)
 	private String type;
-	
+
 	public Long getId() {
 		return id;
 	}
