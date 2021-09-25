@@ -25,7 +25,6 @@ public class UserController {
         modelAndView.setViewName("user/form");
         modelAndView.addObject("userForm", new UserForm());
         return modelAndView;
-
     }
 
 
