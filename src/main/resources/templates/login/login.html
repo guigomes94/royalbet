@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pt_BR">
+    <meta http-equiv="Content-Type"content="text/html"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="text-center" style="background-color: #3399FF">
+<main role="main" class="container">
+    <div class="starter-template">
+        <div class="col-md-8 order-md-1">
+    <form class="form-signin" th:action="@{/login}" method="POST" th:object="${user}">
+        <div class="centered">
+            <div class="display-1">Bem vindo ao Royal Bet</div>
+            <div th:if="${not #strings.isEmpty(mensagem)}"
+                 th:text="${mensagem}"
+                 class="alert alert-danger alert-dismissible fade show" role="alert">
+            </div>
+
+            <label for="cpf" class="sr-only">CPF</label>
+            <input type="text"
+                class="col-md-6 mb-3 form-control input-group" placeholder="CPF" required autofocus
+                th:field="*{cpf}">
+            <label for="senha" class="sr-only">Senha</label>
+            <input type="password" class="col-md-6  mb-3 form-control input-group" placeholder="Senha"
+                required th:field="*{password}">
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="lembrar">
+                    Lembra-me
+                </label>
+            </div>
+            <button class="btn btn-success" type="submit">
+                Entrar
+            </button>
+            <a th:href="@{/user/form}" class="link-secondary">Cadastrar</a>
+        </div>
+    </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="www.thymeleaf.org">
+<head>
+    <!--Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>RoyalBet - Cadastro de Usuário</title>
+</head>
+<body style="background-color: #3399FF">
+<main role="main" class="container">
+    <div class="starter-template">
+        <div class="col-md-8 order-md-1">
+            <h1 class="mb-3">Cadastro de Usuário</h1>
+            <form th:action="@{/user}" method="POST" th:object="${userForm}">
+
+                <div class="row">
+                    <div class="col-md-10 mb-3">
+                        <input class="col-md-6 mb-3 form-control input-group" type="text" placeholder="CPF" th:field="*{user.cpf}"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-10 mb-3">
+                        <input class="col-md-6 mb-3 form-control input-group" type="text" placeholder="Nome" th:field="*{user.name}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 mb-3">
+
+                        <input class="col-md-6 mb-3 form-control input-group" type="text" placeholder="Data de nascimento" th:field="*{user.birthDate}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 mb-3">
+
+                        <input class="col-md-6 mb-3 form-control input-group" type="password" placeholder="Digite sua senha" th:field="*{user.password}"/>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="row">
+                    <button class="col-md-3 mb-3 btn btn-success btn-lg btn-block" type="submit">Salvar</button>
+                    <a class="col-md-3 mb-3" th:href="@{/login}">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>
