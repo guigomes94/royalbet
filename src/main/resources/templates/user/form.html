@@ -11,7 +11,7 @@
     <div class="starter-template">
         <div class="col-md-8 order-md-1">
             <h1 class="mb-3">Cadastro de Usuário</h1>
-            <form th:action="@{/user}" method="POST" th:object="${userForm}">
+            <form th:action="@{/user/create}" method="POST" th:object="${userForm}">
 
                 <div class="row">
                     <div class="col-md-10 mb-3">
@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-10 mb-3">
 
-                        <input class="col-md-6 mb-3 form-control input-group" type="text" placeholder="Data de nascimento" th:field="*{user.birthDate}"/>
+                        <input class="col-md-6 mb-3 form-control input-group" type="date" placeholder="Data de nascimento" th:field="*{user.birthDate}"/>
                     </div>
                 </div>
                 <div class="row">

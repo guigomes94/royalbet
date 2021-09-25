@@ -1,12 +1,17 @@
 package br.com.royalbet.controllers;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.royalbet.models.User;
 import br.com.royalbet.models.UserForm;
@@ -16,7 +21,8 @@ import br.com.royalbet.services.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-	UserService service;
+	@Autowired
+	private UserService service;
 
 	@RequestMapping("/form")
 	public ModelAndView getUserForm(ModelAndView modelAndView) {
@@ -25,15 +31,8 @@ public class UserController {
 		return modelAndView;
 	}
 
-	@GetMapping(value = "/users")
-	public String listAllUsers(Model model) {
-		model.addAttribute("usuarios", service.findAll());
-		return "user/users";
-
-	}
-
-	@GetMapping(value = "/users{id}")
-	public String listUsersId(@PathVariable(value = "id") Long id, Model model) {
+	@GetMapping(value = "/form/{id}")
+	public String editUsuario(@PathVariable(value = "id") Long id, Model model) {
 		User usuario = service.findById(id);
 		if (usuario == null) {
 			model.addAttribute("mensagem", "Usuario não encontrado");
@@ -45,15 +44,16 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/create")
-	public String createUser(User usuario, Model model) {
-		if (usuario.getCpf() == null || usuario.getName() == null || usuario.getName() == null) {
-			model.addAttribute("mensagem", "Prencha os campos obrigatórios");
+	public String createUser(@Valid UserForm form, BindingResult result, RedirectAttributes redirectAttributes) {
+		User usuario = form.getUser();
+		if (result.hasErrors()) {
+			redirectAttributes.addFlashAttribute("mensagem", "Prencha os campos obrigatórios");
 			return "user/form";
 		} else {
 			service.insert(usuario);
-			model.addAttribute("mensagem", "Usuario cadastrado com sucesso");
-			return "user/users";
-		}
+			redirectAttributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso");
+			return "redirect:login/login";
+		}	
 	}
 
 }

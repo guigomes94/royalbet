@@ -1,11 +1,11 @@
 package br.com.royalbet;
 
-import br.com.royalbet.filter.LoginFilter;
-import org.apache.juli.logging.Log;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+
+import br.com.royalbet.filter.LoginFilter;
 
 @SpringBootApplication
 public class RoyalBetApplication {

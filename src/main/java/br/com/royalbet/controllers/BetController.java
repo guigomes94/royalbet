@@ -1,6 +1,7 @@
 package br.com.royalbet.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,8 @@ import br.com.royalbet.services.BetService;
 @RequestMapping("/bet")
 public class BetController {
 
-    BetService service;
+    @Autowired
+	private BetService service;
 
     @RequestMapping("/form")
     public String getBetForm(Bet sorteio, Model model) {

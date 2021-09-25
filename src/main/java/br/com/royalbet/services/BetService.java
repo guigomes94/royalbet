@@ -8,12 +8,14 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import br.com.royalbet.models.Bet;
 import br.com.royalbet.repositories.BetRepository;
 import br.com.royalbet.services.exceptions.DatabaseException;
 import br.com.royalbet.services.exceptions.ResourceNotFoundException;
 
+@Service
 public class BetService {
 
     @Autowired
@@ -29,8 +31,6 @@ public class BetService {
     }
 
     public Bet insert(Bet obj) {
-    	Integer qtdDezenas = obj.getNumbers().split(",").length;
-    	obj.setPrice(calcPrice(qtdDezenas));
         return repository.save(obj);
     }
     
@@ -55,21 +55,6 @@ public class BetService {
 
     }
     
-    private Double calcPrice(int qtdDezenas) {
-    	switch(qtdDezenas) {
-    	case 7:
-    		return 15.0;
-    	case 8:
-    		return 90.0;
-    	case 9:
-    		return 300.0;
-    	case 10:
-    		return 1_200.0;
-    	default:
-    		return 3.0;
-    	}
-    	
-    }
 
     public List<String> sorteador(){
         List<String> numbers = null;

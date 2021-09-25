@@ -1,9 +1,5 @@
 package br.com.royalbet.models;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,13 +18,11 @@ public class User {
 	
 	private String password;
 	
-	private Date birthDate;
+	private String birthDate;
 	
 	private String cpf;
 	
 	private boolean isOperator;
-	
-	private List<Bet> favoriteBets = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -50,11 +44,11 @@ public class User {
 		this.password = password;
 	}
 	
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 	
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 	
@@ -72,14 +66,6 @@ public class User {
 
 	public void setOperator(boolean isOperator) {
 		this.isOperator = isOperator;
-	}
-	
-	public List<Bet> getFavoriteBets() {
-		return favoriteBets;
-	}
-	
-	public void addFavoriteBet(Bet aposta) {
-		favoriteBets.add(aposta);
 	}
 	
 	@Override

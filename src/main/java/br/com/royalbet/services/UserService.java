@@ -13,6 +13,7 @@ import br.com.royalbet.models.User;
 import br.com.royalbet.repositories.UserRepository;
 import br.com.royalbet.services.exceptions.DatabaseException;
 import br.com.royalbet.services.exceptions.ResourceNotFoundException;
+import br.com.royalbet.util.PasswordUtil;
 
 @Service
 public class UserService {
@@ -30,6 +31,7 @@ public class UserService {
 	}	 
 	
 	public User insert(User obj) {
+		obj.setPassword(PasswordUtil.hashPassword(obj.getPassword()));
 		return repository.save(obj);
 	}
 	
