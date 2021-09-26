@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<meta charset="UTF-8">
+<title>Gerar sorteio</title>
+</head>
+<body>
+	<div th:insert="fragments/navigation :: menu"></div>
+	<br />
+	<br />
+	<br />
+	<main role="main" class="container">
+		<div class="starter-template">
+			<div class="col-md-8 order-md-1">
+				<form th:action="@{/sorteio/gerar}" class="form-inline my-2 my-lg-0">
+					<h1 class="mb-3">Gerar sorteio</h1>
+					<button class="btn btn-primary" type="submit">Gerar dezenas</button>
+				</form>
+			
+				
+				<form th:action="@{/sorteio/create}" method="POST" th:object="${sorteio}">
+
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group" type="text"
+								placeholder="Dezenas" th:field="*{numbers}" />
+							
+						</div>
+
+					</div>
+					
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group" type="datetime-local"
+								placeholder="Data/Hora" th:field="*{sorteioDate}">
+							
+						</div>
+
+					</div>
+					<div class="flex-column">
+						<div class="col-md-10 mb-3">
+							<input class="col-md-6 mb-3 form-control input-group" type="text"
+								placeholder="Prêmio" th:field="*{prize}" />
+							
+						</div>
+
+					</div>
+					<hr class="mb-4">
+					<div class="flex-column">
+						<button class="col-md-3 mb-3 btn btn-success btn-lg btn-block"
+							type="submit">Salvar</button>
+						<a class="col-md-3 mb-3" th:href="@{/sorteio/sorteioOperador}">Cancelar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

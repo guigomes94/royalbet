@@ -2,11 +2,12 @@ package br.com.royalbet.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,23 +28,25 @@ public class BetController {
 	}
 
 	@GetMapping("/myBets")
-	public String listBets(Model model){
-		List<Bet> list = service.findByIdUser();
-		model.addAttribute("apostas", list);
+	public String listBets(Model model, HttpSession session){
+		List<Bet> list = service.findByIdUser(session);
+		model.addAttribute("bets", list);
         return "bet/list";	
     }
 
-	@GetMapping(value = "/bets/{id}")
-	public String listBetId(@PathVariable(value = "id") Long id, Model model) {
+	/*@GetMapping(value = "/bets/{id}")
+	public String listBetId(@PathVariable(value = "id") Long id, ModelAndView model, RedirectAttributes redirectAttributes) {
 		Bet bet = service.findById(id);
 		if (bet == null) {
-			model.addAttribute("mensagem", "Sorteio não encontrado");
+			redirectAttributes.addFlashAttribute("mensagem", "Sorteio não encontrado");
 			model.addAttribute("bet", new Bet());
 		} else {
 			model.addAttribute("bet", bet);
 		}
 		return "bet/form";
 	}
+	 */
+
 
 	@PostMapping(value = "/create/bet")
 	public String createBet(Bet bet, Model model) {
@@ -56,5 +59,6 @@ public class BetController {
 			return "bet/bets";
 		}
 	}
+
 
 }

@@ -1,7 +1,5 @@
 package br.com.royalbet.models;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +16,9 @@ public class Sorteio {
 	
 	private String numbers;
 	
-	private LocalDateTime sorteioDate;
+	private String sorteioDate;
 	
-	private Double value;
+	private Double prize;
 
 	public Long getId() {
 		return id;
@@ -38,17 +36,20 @@ public class Sorteio {
 		this.numbers = numbers;
 	}
 
-	public LocalDateTime getSorteioDate() {
+	public String getSorteioDate() {
 		return sorteioDate;
 	}
-
-
-	public Double getValue() {
-		return value;
+	
+	public void setSorteioDate(String date) {
+		this.sorteioDate = date;
 	}
 
-	public void setValue(Double value) {
-		this.value = value;
+	public Double getPrize() {
+		return prize;
+	}
+
+	public void setPrize(Double value) {
+		this.prize = value;
 	}
 	
 	

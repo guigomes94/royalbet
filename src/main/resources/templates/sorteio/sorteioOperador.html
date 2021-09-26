@@ -13,10 +13,28 @@
 	<br />
 	<br />
 	<br />
+	<form th:action="@{/sorteio/form}" class="form-inline my-2 my-lg-0">
+		<button type="submit" class="btn btn-primary">Gerar sorteio</button>					
+	</form>
+	
+	<br />
 	<h1>Listagem de sorteios</h1>
-	<p>
-		Números para você: <span th:text="${sorteio}"></span>
-	</p>
+	<table class="table">
+		<thead>
+		<tr>
+			<th scope="col">Números</th>
+			<th scope="col">Data do Sorteio</th>
+			<th scope="col">Prêmio</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="s : ${sorteios}">
+			<td th:text="${s.numbers}"></td>
+			<td th:text="${s.sorteioDate}"></td>
+			<td th:text="${s.prize}"></td>
+		</tr>
+		</tbody>
+	</table>
 	
 </body>
 </html>
