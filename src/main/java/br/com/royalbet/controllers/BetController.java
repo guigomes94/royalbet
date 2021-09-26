@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.royalbet.models.Bet;
 import br.com.royalbet.services.BetService;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/bet")
@@ -27,23 +31,25 @@ public class BetController {
 	}
 
 	@GetMapping("/myBets")
-	public String listBets(Model model){
-		List<Bet> list = service.findByIdUser();
-		model.addAttribute("apostas", list);
+	public String listBets(Model model, HttpSession session){
+		List<Bet> list = service.findByIdUser(session);
+		model.addAttribute("bets", list);
         return "bet/list";	
     }
 
-	@GetMapping(value = "/bets/{id}")
-	public String listBetId(@PathVariable(value = "id") Long id, Model model) {
+	/*@GetMapping(value = "/bets/{id}")
+	public String listBetId(@PathVariable(value = "id") Long id, ModelAndView model, RedirectAttributes redirectAttributes) {
 		Bet bet = service.findById(id);
 		if (bet == null) {
-			model.addAttribute("mensagem", "Sorteio não encontrado");
+			redirectAttributes.addFlashAttribute("mensagem", "Sorteio não encontrado");
 			model.addAttribute("bet", new Bet());
 		} else {
 			model.addAttribute("bet", bet);
 		}
 		return "bet/form";
 	}
+	 */
+
 
 	@PostMapping(value = "/create/bet")
 	public String createBet(Bet bet, Model model) {
