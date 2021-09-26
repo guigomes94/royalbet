@@ -16,11 +16,11 @@ public class Sorteio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String numbers;
+	public String numbers;
 	
-	private String sorteioDate;
+	public String sorteioDate;
 	
-	private Double prize;
+	public Double prize;
 
 	public Long getId() {
 		return id;

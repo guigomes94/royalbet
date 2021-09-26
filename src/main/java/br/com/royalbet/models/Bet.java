@@ -18,7 +18,7 @@ public class Bet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String numbers;
+	public String numbers;
 	
 	public String getNumbers() {
 		return numbers;
@@ -28,15 +28,26 @@ public class Bet {
 		this.numbers = numbers;
 	}
 	
-	private boolean isFavorite;
+	public boolean isFavorite;
 
-	private Date betDate;
+	public Date betDate;
 	
-	private Double price;
-	
+	public Double price;
+
+	public Integer getDezenas() {
+		return dezenas;
+	}
+
+
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
+	
+	public void setDezenas(Integer dezenas) {
+		this.dezenas = dezenas;
+	}
+
+	public Integer dezenas;
 
 	public Long getId() {
 		return id;
