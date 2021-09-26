@@ -1,9 +1,7 @@
 package br.com.royalbet.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
@@ -40,8 +38,11 @@ public class BetService {
                 .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Bet insert(Bet obj) {
-
+    public Bet insert(Bet obj, User usuario) {
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        obj.setDataBet(date);
+        obj.setUser(usuario);
         return repository.save(obj);
     }
     
@@ -107,7 +108,9 @@ public class BetService {
         Integer dezenas = numbers.size();
             Double price = priceDezenas(dezenas);
             bet.setPrice(price);
+
     }
+
 
 
     private Double priceDezenas(Integer dezenas){

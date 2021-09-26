@@ -2,6 +2,7 @@ package br.com.royalbet.controllers;
 
 import java.util.List;
 
+import br.com.royalbet.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,8 @@ public class BetController {
         return "bet/list";	
     }
 
-	/*@GetMapping(value = "/bets/{id}")
+	/*
+	@GetMapping(value = "/bets/{id}")
 	public String listBetId(@PathVariable(value = "id") Long id, ModelAndView model, RedirectAttributes redirectAttributes) {
 		Bet bet = service.findById(id);
 		if (bet == null) {
@@ -50,17 +52,18 @@ public class BetController {
 	 */
 
 
-	@PostMapping(value = "/create/bet")
-	public ModelAndView createBet(Bet bet, ModelAndView model,RedirectAttributes redirectAttributes ){
-		if (bet.getDataBet() == null) {
+	@PostMapping(value = "/create")
+	public ModelAndView createBet(Bet bet, ModelAndView model,RedirectAttributes redirectAttributes, HttpSession session ){
+		User usuario = (User) session.getAttribute("user");
+		if (bet.getNumbers() == null) {
 			redirectAttributes.addFlashAttribute("mensagem", "Prencha os campos obrigatórios");
 			model.setViewName("redirect:/bet/form");
 			return model;
 		} else {
 			service.fazerAposta(bet);
-			service.insert(bet);
+			service.insert(bet, usuario);
 			redirectAttributes.addFlashAttribute("mensagem", "Sorteio cadastrado com sucesso");
-			model.setViewName("redirect:bet/bets");
+			model.setViewName("redirect:/bet/myBets");
 			return model;
 		}
 	}

@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-
+<div th:insert="fragments/navigation :: menu"></div>
+<br />
+<br />
+<br />
+<div class="contaner-sm">
+    <form th:action="@{/bet/create}" method="POST" th:object="${sorteio}">
+        <div th:if="${not #strings.isEmpty(mensagem)}"
+             th:text="${mensagem}"
+             class="alert alert-danger alert-dismissible fade show" role="alert"></div>
+        <small> Digite sua aposta com cada dezena separada por vírgula </small>
+        <small> Exemplo: 25,30,45,12,23,21</small>
+        <input class="col-md-6 mb-3 form-control input-group" type="text"
+               placeholder="Aposta" th:field="*{numbers}" />
+        <small>Número mínimo de dezenas 6 número máximo de dezenas 10</small>
+        <button class="col-md-2 mb-3 btn btn-success btn-lg btn-block"
+                type="submit">Salvar</button>
+        <a th:href="@{myBets}" class="dark-blue">Cancelar</a>
+    </form>
+</div>
 </body>
 </html>
