@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,15 +51,20 @@ public class BetController {
 
 
 	@PostMapping(value = "/create/bet")
-	public String createBet(Bet bet, Model model) {
+	public ModelAndView createBet(Bet bet, ModelAndView model,RedirectAttributes redirectAttributes ){
 		if (bet.getDataBet() == null) {
-			model.addAttribute("mensagem", "Prencha os campos obrigatórios");
-			return "bet/form";
+			redirectAttributes.addFlashAttribute("mensagem", "Prencha os campos obrigatórios");
+			model.setViewName("redirect:/bet/form");
+			return model;
 		} else {
+			service.fazerAposta(bet);
 			service.insert(bet);
-			model.addAttribute("mensagem", "Sorteio cadastrado com sucesso");
-			return "bet/bets";
+			redirectAttributes.addFlashAttribute("mensagem", "Sorteio cadastrado com sucesso");
+			model.setViewName("redirect:bet/bets");
+			return model;
 		}
 	}
+
+
 
 }

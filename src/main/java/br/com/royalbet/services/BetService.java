@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.royalbet.models.User;
 import br.com.royalbet.repositories.UserRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -100,4 +101,24 @@ public class BetService {
 
         return allBetsByUser;
 	}
+
+    public void fazerAposta(Bet bet){
+        List<String> numbers = List.of(bet.getNumbers().split(","));
+        Integer dezenas = numbers.size();
+            Double price = priceDezenas(dezenas);
+            bet.setPrice(price);
+    }
+
+
+    private Double priceDezenas(Integer dezenas){
+        HashMap<Integer,Double> price = new HashMap<>();
+        price.put(6,3.0);
+        price.put(7,15.0);
+        price.put(8,90.0);
+        price.put(9,300.0);
+        price.put(10,1200.0);
+
+        return price.get(dezenas);
+
+    }
 }
