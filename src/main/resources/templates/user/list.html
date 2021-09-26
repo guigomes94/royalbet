@@ -6,6 +6,7 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <title>Usuários cadastrados</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
 	<br />
 	<br />
 	<h1>Usuários cadastrados</h1>
-	<table>
+	<table class="table">
 		<tr>
 			<th>NOME</th>
 			<th>CPF</th>
@@ -25,7 +26,11 @@
 			<td><span th:text="${user.name}"></span></td>
 			<td><span th:text="${user.cpf}"></span></td>
 			<td><span th:text="${user.birthDate}"></span></td>
-			<td><span th:text="${user.isOperator}"></span></td>
+			<td><a th:href="@{{id}/setOperator(id=${user.id})}">
+				<span th:if="${user.isOperator}" class="material-icons">check</span>
+				<span th:unless="${user.isOperator}" class="material-icons">cancel</span>
+				</a>
+			</td>
 		</tr>
 	</table>
 </body>

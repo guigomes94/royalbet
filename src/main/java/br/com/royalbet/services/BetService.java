@@ -1,10 +1,16 @@
 package br.com.royalbet.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpSession;
 
+import br.com.royalbet.models.User;
+import br.com.royalbet.repositories.UserRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,6 +27,9 @@ public class BetService {
     @Autowired
     private BetRepository repository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public List<Bet> findAll() {
         return repository.findAll();
     }
@@ -31,6 +40,7 @@ public class BetService {
     }
 
     public Bet insert(Bet obj) {
+
         return repository.save(obj);
     }
     
@@ -84,8 +94,10 @@ public class BetService {
         return number;
     }
 
-	public List<Bet> findByIdUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Bet> findByIdUser(HttpSession userSession) {
+        User loginUser = (User) userSession.getAttribute("user");
+		List<Bet> allBetsByUser = repository.findBetsByUser(loginUser);
+
+        return allBetsByUser;
 	}
 }

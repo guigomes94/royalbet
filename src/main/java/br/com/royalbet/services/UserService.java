@@ -25,6 +25,10 @@ public class UserService {
 		return repository.findAll();
 	}
 	
+	public List<User> findAllOthers(Long id) {
+		return repository.findOthers(id);
+	}
+	
 	public User findById(Long id) {
 		return repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(id));
@@ -47,6 +51,16 @@ public class UserService {
 		try {
 			User entity = repository.getById(id);
 			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	
+	public User changeOperator(Long id) {
+		try {
+			User entity = repository.getById(id);
+			entity.setOperator(!entity.isOperator());
 			return repository.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);

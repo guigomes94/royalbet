@@ -2,6 +2,7 @@ package br.com.royalbet.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/admin")
-	public String listUsuarios(Model model) {
-		List<User> users = service.findAll();
+	public String listUsuarios(Model model, HttpSession session) {
+		User logado = (User) session.getAttribute("user");
+		List<User> users = service.findAllOthers(logado.getId());
 		model.addAttribute("users", users);
 		return "user/list";
 	}
@@ -71,6 +73,14 @@ public class UserController {
 			model.setViewName("redirect:/login");
 			return model;
 		}
+	}
+	
+	@RequestMapping("/{id}/setOperator")
+	public String setOperator(@PathVariable(value = "id") Long id, Model model) {
+		service.changeOperator(id);
+		List<User> users = service.findAll();
+		model.addAttribute("users", users);
+		return "redirect:/user/admin";
 	}
 	
 

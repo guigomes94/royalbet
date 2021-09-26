@@ -21,7 +21,12 @@ public class LoginController {
 	private UserRepository userRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView getForm(ModelAndView modelAndView) {
+	public ModelAndView getForm(ModelAndView modelAndView, HttpSession session) {
+		User logado = (User) session.getAttribute("user");
+		if (logado != null) {
+			modelAndView.setViewName("/home");
+			return modelAndView;
+		}
 		modelAndView.setViewName("login/login");
 		modelAndView.addObject("user", new User());
 		return modelAndView;
