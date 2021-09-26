@@ -32,10 +32,10 @@
 							
 						<li class="nav-item dropdown" th:if="${session.user != null}">
 						<a class="nav-link" th:if="${session.user.isOperator}"
-							th:href="@{/sorteio/sorteioOperador}" aria-haspopup="true"
+							th:href="@{/sorteio/sorteiooperador}" aria-haspopup="true"
 							aria-expanded="false">Sorteios</a>
 						<a class="nav-link" th:unless="${session.user.isOperator}"
-							th:href="@{/sorteio/sorteioCliente}" aria-haspopup="true"
+							th:href="@{/sorteio/sorteiocliente}" aria-haspopup="true"
 							aria-expanded="false">Sorteios</a>
 						</li>
 						<li class="nav-item dropdown" th:if="${session.user != null}">

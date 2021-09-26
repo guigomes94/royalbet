@@ -39,5 +39,4 @@ public class SorteioService {
 	public void insert(Sorteio obj) {
 		repository.save(obj);
 	}
-
 }

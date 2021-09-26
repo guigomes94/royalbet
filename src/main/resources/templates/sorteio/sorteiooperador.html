@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Sorteios</title>
+</head>
+<body>
+	<div th:insert="fragments/navigation :: menu"></div>
+
+	<br />
+	<br />
+	<br />
+	<h1>Listagem de sorteios</h1>
+
+	<form th:action="@{/sorteio/salvar}" method="POST" th:object="${sorteioform}">
+	<p>
+		Números para você: <span th:text="${sorteionumero}" id="numbers" name="numbers"></span>
+	</p>
+		<input class="col-md-6 mb-3 form-control input-group" type="datetime"
+			   placeholder="Data de nascimento" th:field="*{sorteioDate}"/>
+		<button class="col-md-3 mb-3 btn btn-success btn-lg btn-block" type="submit">Salvar</button>
+	</form>
+
+</body>
+</html>

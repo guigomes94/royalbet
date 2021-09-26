@@ -18,9 +18,9 @@ public class Sorteio {
 	
 	private String numbers;
 	
-	private LocalDateTime sorteioDate;
+	private String sorteioDate;
 	
-	private Double value;
+	private Double prize;
 
 	public Long getId() {
 		return id;
@@ -38,17 +38,17 @@ public class Sorteio {
 		this.numbers = numbers;
 	}
 
-	public LocalDateTime getSorteioDate() {
+	public String getSorteioDate() {
 		return sorteioDate;
 	}
 
 
-	public Double getValue() {
-		return value;
+	public Double getPrize() {
+		return prize;
 	}
 
-	public void setValue(Double value) {
-		this.value = value;
+	public void setPrize(Double prize) {
+		this.prize = prize;
 	}
 	
 	
