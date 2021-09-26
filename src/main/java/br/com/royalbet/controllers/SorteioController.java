@@ -30,6 +30,8 @@ public class SorteioController {
 	
 	@GetMapping("/sorteioCliente")
     public String homeSorteioViewCliente(Model model){
+		List<Sorteio> list = service.findAll();
+		model.addAttribute("sorteios", list);
         return "sorteio/sorteioCliente";	
     }
 	
