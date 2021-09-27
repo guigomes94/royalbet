@@ -18,21 +18,13 @@ public class Bet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	public String numbers;
-	
-	public String getNumbers() {
-		return numbers;
-	}
-
-	public void setNumbers(String numbers) {
-		this.numbers = numbers;
-	}
+	private String numbers;
 	
 	private boolean isFavorite;
 
-	public Date betDate;
+	private Date betDate;
 	
-	public Double price;
+	private Double price;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -44,6 +36,14 @@ public class Bet {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getNumbers() {
+		return numbers;
+	}
+
+	public void setNumbers(String numbers) {
+		this.numbers = numbers;
 	}
 
 	public boolean isFavorite() {
@@ -62,12 +62,12 @@ public class Bet {
 		this.user = user;
 	}
 
-	public Date getDataBet() {
+	public Date getBetDate() {
 		return betDate;
 	}
 
-	public void setDataBet(Date dataBet) {
-		this.betDate = dataBet;
+	public void setBetDate(Date betDate) {
+		this.betDate = betDate;
 	}
 	
 	public Double getPrice() {

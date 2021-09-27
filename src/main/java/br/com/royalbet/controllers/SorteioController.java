@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.royalbet.models.Sorteio;
+import br.com.royalbet.services.BetService;
 import br.com.royalbet.services.SorteioService;
 
 @Controller
@@ -20,6 +21,9 @@ public class SorteioController {
 	
 	@Autowired
 	private SorteioService service;
+	
+	@Autowired
+	private BetService betService;
 	
 	@GetMapping("/sorteioOperador")
     public String homeSorteioViewOperador(Model model){
@@ -34,6 +38,16 @@ public class SorteioController {
 		model.addAttribute("sorteios", list);
         return "sorteio/sorteioCliente";	
     }
+	
+//	@ModelAttribute("apostas")
+//	public List<String> getApostas(HttpSession session) {
+//		List<Bet> bets = betService.findByIdUser(session);
+//		List<String> numbers = new ArrayList<>();
+//		for (Bet b: bets) {
+//			numbers.add(b.getNumbers());
+//		}
+//		return numbers;
+//	}
 	
 	@RequestMapping("/form")
 	public ModelAndView getSorteioForm(ModelAndView modelAndView) {
@@ -61,4 +75,5 @@ public class SorteioController {
 		service.insert(sorteio);
 		return "redirect:/sorteio/sorteioOperador";
 	}
+	
 }

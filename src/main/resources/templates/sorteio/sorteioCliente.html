@@ -5,6 +5,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <meta charset="UTF-8">
 <title>Sorteios</title>
 </head>
@@ -20,6 +21,7 @@
 			<th scope="col">Números</th>
 			<th scope="col">Data do Sorteio</th>
 			<th scope="col">Prêmio</th>
+			<th scope="col">Check</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -27,9 +29,10 @@
 			<td th:text="${s.numbers}"></td>
 			<td th:text="${s.sorteioDate}"></td>
 			<td th:text="${s.prize}"></td>
+			<td>
+			</td>
 		</tr>
 		</tbody>
 	</table>
-	
 </body>
 </html>
