@@ -17,10 +17,13 @@
 	<main role="main" class="container">
 		<div class="starter-template">
 			<div class="col-md-8 order-md-1">
-				<form th:action="@{/sorteio/gerar}" class="form-inline my-2 my-lg-0">
-					<h1 class="mb-3">Gerar sorteio</h1>
+			<div class="col-md-10 mb-3">
+				<h1 class="mb-3">Gerar sorteio</h1>
+				<h4>Você pode digitar as 6 dezenas separadas por vírgula, ou gerar ao clicar no botão abaixo</h4>
+				<a th:href="@{gerar}">
 					<button class="btn btn-primary" type="submit">Gerar dezenas</button>
-				</form>
+				</a>
+			</div>
 			
 				
 				<form th:action="@{/sorteio/create}" method="POST" th:object="${sorteio}">
@@ -28,7 +31,7 @@
 					<div class="flex-column">
 						<div class="col-md-10 mb-3">
 							<input class="col-md-6 mb-3 form-control input-group" type="text"
-								placeholder="Dezenas" th:field="*{numbers}" />
+								placeholder="Exemplo: 25,30,45,12,23,21" th:field="*{numbers}" />
 							
 						</div>
 

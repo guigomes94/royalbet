@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div th:insert="fragments/navigation :: menu"></div>
+	<br />
+	<br />
+	<br />
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<form th:action="@{/bet/create}" method="POST"
+					th:object="${sorteio}">
+					<div th:if="${not #strings.isEmpty(mensagem)}"
+						th:text="${mensagem}"
+						class="alert alert-danger alert-dismissible fade show"
+						role="alert"></div>
+					<h4>
+						Digite sua aposta com cada dezena separada por vírgula (1-60)
+						</h4>
+						<input class="col-md-6 mb-3 form-control input-group" type="text"
+							placeholder="Exemplo: 25,30,45,12,23,21" th:field="*{numbers}" />
+						
+						<div th:if="${not #lists.isEmpty(favoritos)}">
+							<span>Seus números favoritos:</span>
+							<ul th:each="f : ${favoritos}" class="list-group list-group-flush">
+							  <li th:text="${f.numbers}" class="list-group-item"></li>
+							</ul>
+						</div>
+						
+						<small>Mínimo de 6 dezenas e máximo de 10 dezenas</small>
+						<button class="col-md-2 mb-3 btn btn-success btn-lg btn-block"
+							type="submit">Salvar</button>
+						<a th:href="@{myBets}" class="dark-blue">Cancelar</a>
+				</form>
+			</div>
+			<div class="col">
+				<table class="table">
+					<tr>
+						<th>Qtd. de Dezenas</th>
+						<th>Valor da Aposta</th>
+					</tr>
+					<tr>
+						<td><span>6</span></td>
+						<td><span>R$ 3,00</span></td>
+					</tr>
+					<tr>
+						<td><span>7</span></td>
+						<td><span>R$ 15,00</span></td>
+					</tr>
+					<tr>
+						<td><span>8</span></td>
+						<td><span>R$ 90,00</span></td>
+					</tr>
+					<tr>
+						<td><span>9</span></td>
+						<td><span>R$ 300,00</span></td>
+					</tr>
+					<tr>
+						<td><span>10</span></td>
+						<td><span>R$ 1.200,00</span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

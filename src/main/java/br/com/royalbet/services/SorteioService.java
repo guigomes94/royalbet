@@ -37,10 +37,6 @@ public class SorteioService {
 	}
 
 	public void insert(Sorteio obj) {
-		String numbers = obj.getNumbers();
-		numbers = numbers.replace("[", " ");
-		numbers = numbers.replace("]", " ");
-		obj.setNumbers(numbers);
 		repository.save(obj);
 	}
 

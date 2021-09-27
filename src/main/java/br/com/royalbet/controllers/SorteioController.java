@@ -38,10 +38,7 @@ public class SorteioController {
 	@RequestMapping("/form")
 	public ModelAndView getSorteioForm(ModelAndView modelAndView) {
 		modelAndView.setViewName("sorteio/form");
-		Sorteio sorteio = new Sorteio();
-		Set<Integer> list = service.gerarSorteio();
-		sorteio.setNumbers(list.toString());
-		modelAndView.addObject("sorteio", sorteio);
+		modelAndView.addObject("sorteio", new Sorteio());
 		return modelAndView;
 	}
 	
@@ -50,7 +47,11 @@ public class SorteioController {
 		modelAndView.setViewName("sorteio/form");
 		Sorteio sorteio = new Sorteio();
 		Set<Integer> list = service.gerarSorteio();
-		sorteio.setNumbers(list.toString());
+		String numbers = list.toString();
+		numbers = numbers.replace("[", " ");
+		numbers = numbers.replace("]", " ");
+		numbers = numbers.trim();
+		sorteio.setNumbers(numbers);
 		modelAndView.addObject("sorteio", sorteio);
 		return modelAndView;
 	}
